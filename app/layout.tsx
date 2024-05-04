@@ -28,7 +28,9 @@ const fontSans = FontSans({
   variable: "--font-sans",
 });
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {},
+});
 
 export default function RootLayout({
   children,
@@ -67,8 +69,8 @@ export default function RootLayout({
                   <div className="hidden md:block left_sidebar relative h-screen basis-64">
                     <SidebarPc />
                   </div>
-                  <div className="main_content flex-grow">
-                    <div className="h-screen w-full  pt-12">
+                  <div className="w-full main_content flex-grow">
+                    <div className="h-screen w-full flex py-16 flex-col items-center justify-start">
                       <SignedIn>
                         <QueryClientProvider
                           client={queryClient}
@@ -86,7 +88,7 @@ export default function RootLayout({
                     </div>
                   </div>
                   <div className="right_sidebar basis-64 ">
-                    <div className="h-screen ">Right Sidebar</div>
+                    <div className="h-screen "></div>
                   </div>
                 </div>
               </main>

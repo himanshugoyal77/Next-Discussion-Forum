@@ -28,7 +28,7 @@ const Header = () => {
     "
     >
       <div className="md:hidden flex items-center justify-center">
-        <div
+        {/* <div
           onClick={() => dispatch(toggle())}
           className="cursor-pointer mr-3 relative
         "
@@ -53,7 +53,7 @@ const Header = () => {
                 : "transition-all ease-in-out transform duration-500 opacity-0 rotate-45"
             }`}
           />
-        </div>
+        </div> */}
         <Link href="/">
           <div className="text-lg uppercase font-bold text-white">H-forum</div>
         </Link>
