@@ -20,6 +20,7 @@ import { upload } from "@/lib/utils";
 import { toast } from "sonner";
 import { duration } from "moment";
 import { Skeleton } from "../ui/skeleton";
+import axios from "axios";
 
 const SidebarPc = () => {
   const { user } = useUser();
@@ -54,14 +55,20 @@ const SidebarPc = () => {
         setProfileImage(url);
         console.log("url", profileImage);
       }
-      toast("Image uploaded successfully", {
-        onAutoClose: () => {},
-        duration: 5000,
-        action: {
-          label: "Undo",
-          onClick: () => {},
-        },
-      });
+      axios
+        .put("/api/user", {
+          id: user?.id,
+          imageUrl: profileImage,
+        })
+        .then((res) => {
+          toast.success(res.data.msg, {
+            duration: 5000,
+            action: {
+              label: "Close",
+              onClick: () => {},
+            },
+          });
+        });
     } catch (error) {
       toast("Failed to upload image", {
         duration: 5000,

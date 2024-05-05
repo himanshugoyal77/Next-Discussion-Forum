@@ -1,3 +1,4 @@
+"use strict";
 "use client";
 
 import { Inter as FontSans } from "next/font/google";
