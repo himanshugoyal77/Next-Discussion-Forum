@@ -23,7 +23,7 @@ const Questions = ({ question }: IQuestion) => {
   return (
     <div
       className="flex flex-col shadow-sm shadow-[#242424]
-    bg-white dark:bg-gray-800 dark:text-white
+    bg-white dark:bg-[#1E212A] dark:text-white
     mt-5
 max-h-min w-[70%] justify-start items-start rounded-xl p-4
 "

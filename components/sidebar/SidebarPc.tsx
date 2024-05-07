@@ -37,214 +37,101 @@ const SidebarPc = () => {
 
   if (loading) return <Skeleton className="w-[100px] h-[20px] rounded-sm" />;
 
-  const active = "relative bg-slate-50 text-black font-semibold rounded-r-md";
-
-  const handleFile1 = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    e.preventDefault();
-
-    try {
-      const files = e.target?.files;
-      if (files?.length! > 0) {
-        const data = new FormData();
-        // @ts-ignore
-        for (const file of files!) {
-          data.append("file", file);
-        }
-        data.append("upload_preset", "h-forum");
-        const url = await upload(data);
-        setProfileImage(url);
-        console.log("url", profileImage);
-      }
-      axios
-        .put("/api/user", {
-          id: user?.id,
-          imageUrl: profileImage,
-        })
-        .then((res) => {
-          toast.success(res.data.msg, {
-            duration: 5000,
-            action: {
-              label: "Close",
-              onClick: () => {},
-            },
-          });
-        });
-    } catch (error) {
-      toast("Failed to upload image", {
-        duration: 5000,
-
-        onAutoClose: () => {},
-        action: {
-          label: "Undo",
-          onClick: () => {},
-        },
-      });
-    }
-  };
+  const active =
+    "relative bg-[#2C353D] text-white text-black font-semibold rounded-r-md";
 
   return (
-    <div className="w-[256px] flex flex-col gap-y-2 mt-20 fixed z-10 h-screen top-0">
-      <div className="user flex flex-col items-center my-4">
-        <div className="relative mb-3 ">
-          <label
-            className="mx-auto
-            h-[115px] w-[115px]
-            flex flex-col items-center justify-center rounded-full
-                cursor-pointer border-dashed border-2 border-slate-600"
-          >
-            <Image
-              fill
-              objectFit="cover"
-              className="rounded-full border-dashed border-2 border-slate-600"
-              src={profileImage}
-              alt="user-image"
-            />
-            <input
-              onChange={handleFile1}
-              id="dropzone-file"
-              type="file"
-              className="hidden"
-            />
-          </label>
-          <div className="absolute right-1 bottom-1 h-6 w-6 flex items-center justify-center rounded-full bg-[#242424]">
-            <Pencil fill="grey" height={12} width={12} />
-          </div>
-        </div>
-        <p className="text-slate-500 text-sm flex items-center gap-2">
-          @
-          {user?.primaryEmailAddress?.emailAddress?.split("@")[0] || (
-            <Skeleton className="w-[100px] h-[20px] rounded-sm" />
-          )}
-        </p>
-        <div className="text-white flex items-center justify-center">
-          👋{" "}
-          {user?.fullName || (
-            <Skeleton className="w-[140px] h-[20px] rounded-sm" />
-          )}
-        </div>
-      </div>
+    <div className="w-[200px] h-min bg-[#262D34] rounded-xl p-2 flex flex-col mt-20 fixed z-10 top-0">
       <div
         onClick={() => {
           push("/");
           //dispatch(toggle());
         }}
         className={`
-          transition-all duration-300 ease-in-out
+          transition-all duration-300 ease-in-out rounded-md
           fade-in-100 fade-out-0
-          px-4 h-12 text-start
+          px-4 h-12 text-start 
           flex items-center justify-start
-          cursor-pointer ${pathname === "/" ? active : "bg-[#1E212A]"}`}
+          cursor-pointer ${pathname === "/" ? active : "text-gray-300"}`}
       >
-        <div className="flex items-center justify-center gap-2">
-          <Home height={22} width={22} />
+        <div className="flex items-center justify-center gap-[10px]">
+          <Home height={20} width={20} />
           Feed
         </div>
-        <div
+        {/* <div
           className={`
             ${
               pathname === "/"
                 ? "absolute left-0 h-5 w-5 triangle z-40 bg-[#020817]"
                 : "hidden"
             }`}
-        ></div>
+        ></div> */}
       </div>
       <div
         onClick={() => {
           push("/about");
         }}
         className={`
-          transition-all duration-300 ease-in-out
+          transition-all duration-300 ease-in-out rounded-md
           fade-in-100 fade-out-0
           px-4 h-12 text-start
           flex items-center justify-start
-          cursor-pointer ${pathname === "/about" ? active : "bg-[#1E212A]"}`}
+          cursor-pointer ${pathname === "/about" ? active : "text-gray-300"}`}
       >
-        <div className="flex items-center justify-center gap-2">
-          <Info height={22} width={22} />
+        <div className="flex items-center justify-center gap-[10px]">
+          <Info height={20} width={20} />
           Community
         </div>
-        <div
-          className={`
-            ${
-              pathname === "/about"
-                ? "absolute left-0 h-4 w-5 triangle z-40 bg-[#020817]"
-                : "hidden"
-            }`}
-        ></div>
       </div>
       <div
         onClick={() => {
           push("/contact");
         }}
         className={`
-          transition-all duration-300 ease-in-out
+          transition-all duration-300 ease-in-out rounded-md
           fade-in-100 fade-out-0
           px-4 h-12 text-start
           flex items-center justify-start
-          cursor-pointer ${pathname === "/contact" ? active : "bg-[#1E212A]"}`}
+          cursor-pointer ${pathname === "/contact" ? active : "text-gray-300"}`}
       >
-        <div className="flex items-center justify-center gap-2">
-          <Contact height={22} width={22} />
+        <div className="flex items-center justify-center gap-[10px]">
+          <Contact height={20} width={20} />
           Settings
         </div>
-        <div
-          className={`
-            ${
-              pathname === "/contact"
-                ? "absolute left-0 h-4 w-5 triangle z-40 bg-[#020817]"
-                : "hidden"
-            }`}
-        ></div>
       </div>
       <div
         onClick={() => {
           push("/contact");
         }}
         className={`
-          transition-all duration-300 ease-in-out
+          transition-all duration-300 ease-in-out rounded-md
           fade-in-100 fade-out-0
           px-4 h-12 text-start
           flex items-center justify-start
           cursor-pointer ${
-            pathname === "/liive-chat" ? active : "bg-[#1E212A]"
+            pathname === "/liive-chat" ? active : "text-gray-300"
           }`}
       >
-        <div className="flex items-center justify-center gap-2">
-          <Contact height={22} width={22} />
+        <div className="flex items-center justify-center gap-[10px]">
+          <Contact height={20} width={20} />
           Live Chat
         </div>
-        <div
-          className={`
-            ${
-              pathname === "/live-chat"
-                ? "absolute left-0 h-4 w-5 triangle z-40 bg-[#020817]"
-                : "hidden"
-            }`}
-        ></div>
       </div>
       <div
         onClick={() => {
           push("/contact");
         }}
         className={`
-          transition-all duration-300 ease-in-out
+          transition-all duration-300 ease-in-out rounded-md
           fade-in-100 fade-out-0
           px-4 h-12 text-start
           flex items-center justify-start
-          cursor-pointer ${pathname === "/my-qna" ? active : "bg-[#1E212A]"}`}
+          cursor-pointer ${pathname === "/my-qna" ? active : "text-gray-300"}`}
       >
-        <div className="flex items-center justify-center gap-2">
-          <Contact height={22} width={22} />
+        <div className="flex items-center justify-center gap-[10px]">
+          <Contact height={20} width={20} />
           My QnA
         </div>
-        <div
-          className={`
-            ${
-              pathname === "/my-qna"
-                ? "absolute left-0 h-4 w-5 triangle z-40 bg-[#020817]"
-                : "hidden"
-            }`}
-        ></div>
       </div>
     </div>
   );
