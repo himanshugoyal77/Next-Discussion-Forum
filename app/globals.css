@@ -61,3 +61,8 @@
 .triangle {
   clip-path: polygon(0 0, 0% 100%, 25% 50%);
 }
+
+/* // remove scrollbar */
+::-webkit-scrollbar {
+  display: none;
+}

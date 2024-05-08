@@ -74,15 +74,14 @@ export default function Home() {
       return axios.get("/api/posts").then((res) => res.data.data);
     }
   );
-  console.log("Data", data);
   if (isLoading) return <Loading />;
 
   return (
-    <>
+    <div className="w-full h-screen overflow-y-scroll">
       {data &&
         data.map((question: IQuestion) => (
           <Questions key={question?._id!} question={question} />
         ))}
-    </>
+    </div>
   );
 }

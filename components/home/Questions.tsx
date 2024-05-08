@@ -24,8 +24,8 @@ const Questions = ({ question }: IQuestion) => {
     <div
       className="flex flex-col shadow-sm shadow-[#242424]
     bg-white dark:bg-[#1E212A] dark:text-white
-    mt-5
-max-h-min w-[70%] justify-start items-start rounded-xl p-4
+    mb-5
+max-h-min w-[97%] justify-start items-start rounded-xl p-4
 "
     >
       <div className="w-full flex items-start justify-between">

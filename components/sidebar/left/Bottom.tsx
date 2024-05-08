@@ -19,10 +19,10 @@ import Image from "next/image";
 import { upload } from "@/lib/utils";
 import { toast } from "sonner";
 import { duration } from "moment";
-import { Skeleton } from "../ui/skeleton";
+import { Skeleton } from "../../ui/skeleton";
 import axios from "axios";
 
-const SidebarPc = () => {
+const SidebarBottom = () => {
   const { user } = useUser();
   const pathname = usePathname();
   const { push } = useRouter();
@@ -35,13 +35,11 @@ const SidebarPc = () => {
     setProfileImage(url! || user?.imageUrl!);
   }, []);
 
-  if (loading) return <Skeleton className="w-[100px] h-[20px] rounded-sm" />;
-
   const active =
     "relative bg-[#2C353D] text-white text-black font-semibold rounded-r-md";
 
   return (
-    <div className="w-[200px] h-min bg-[#262D34] rounded-xl p-2 flex flex-col mt-20 fixed z-10 top-0">
+    <div className="w-full h-min bg-[#262D34] rounded-xl p-2 flex flex-col mt-4">
       <div
         onClick={() => {
           push("/");
@@ -54,9 +52,13 @@ const SidebarPc = () => {
           flex items-center justify-start
           cursor-pointer ${pathname === "/" ? active : "text-gray-300"}`}
       >
-        <div className="flex items-center justify-center gap-[10px]">
+        <div
+          className={`flex items-center justify-center gap-[10px] ${
+            pathname === "/" ? "text-[#FF6934]" : ""
+          }`}
+        >
           <Home height={20} width={20} />
-          Feed
+          <p>Feed</p>
         </div>
         {/* <div
           className={`
@@ -78,7 +80,11 @@ const SidebarPc = () => {
           flex items-center justify-start
           cursor-pointer ${pathname === "/about" ? active : "text-gray-300"}`}
       >
-        <div className="flex items-center justify-center gap-[10px]">
+        <div
+          className={`flex items-center justify-center gap-[10px] ${
+            pathname === "/about" ? "text-[#FF6934]" : ""
+          }`}
+        >
           <Info height={20} width={20} />
           Community
         </div>
@@ -137,4 +143,4 @@ const SidebarPc = () => {
   );
 };
 
-export default SidebarPc;
+export default SidebarBottom;

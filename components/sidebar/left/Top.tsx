@@ -2,14 +2,15 @@
 
 import { useUser } from "@clerk/nextjs";
 import React, { useEffect } from "react";
-import { Skeleton } from "../ui/skeleton";
+
 import { Pencil } from "lucide-react";
 import { toast } from "sonner";
 import axios from "axios";
 import Image from "next/image";
 import { upload } from "@/lib/utils";
+import { Skeleton } from "@/components/ui/skeleton";
 
-const RightsideBar = () => {
+const Topbar = () => {
   const { user } = useUser();
   const [profileImage, setProfileImage] = React.useState<string>("");
   const [mounted, setMounted] = React.useState<boolean>(false);
@@ -67,46 +68,27 @@ const RightsideBar = () => {
   };
 
   return (
-    <div className="user flex flex-col items-center justify-center my-4">
-      <div className="relative mb-3 ">
-        <label
-          className="mx-auto
-      h-[115px] w-[115px]
-      flex flex-col items-center justify-center rounded-full
-          cursor-pointer border-dashed border-2 border-slate-600"
-        >
-          <Image
-            fill
-            objectFit="cover"
-            className="rounded-full border-dashed border-2 border-slate-600"
-            src={profileImage}
-            alt="user-image"
-          />
-          <input
-            onChange={handleFile1}
-            id="dropzone-file"
-            type="file"
-            className="hidden"
-          />
-        </label>
-        <div className="absolute right-1 bottom-1 h-6 w-6 flex items-center justify-center rounded-full bg-[#242424]">
-          <Pencil fill="grey" height={12} width={12} />
+    <div className="w-full bg-[#262D34] rounded-xl py-2">
+      <div className="user flex flex-col items-center justify-center my-2">
+        <p className="text-white text-sm flex items-center gap-2">
+          <Image src="/wave.png" height={20} width={20} alt="image" />@
+          {user?.primaryEmailAddress?.emailAddress?.split("@")[0] || (
+            <Skeleton className="w-[100px] h-[20px] rounded-sm" />
+          )}
+        </p>
+        <div className="w-full px-6 flex justify-around items-center mt-2">
+          <div className="followers flex flex-col items-center justify-center gap-1">
+            <p className="text-white text-2xl font-bold">120</p>
+            <p className="text-white text-sm">Followers</p>
+          </div>
+          <div className="following flex flex-col items-center justify-center gap-1">
+            <p className="text-white text-2xl font-bold">34</p>
+            <p className="text-white text-sm">Following</p>
+          </div>
         </div>
-      </div>
-      <p className="text-slate-500 text-sm flex items-center gap-2">
-        @
-        {user?.primaryEmailAddress?.emailAddress?.split("@")[0] || (
-          <Skeleton className="w-[100px] h-[20px] rounded-sm" />
-        )}
-      </p>
-      <div className="text-white flex items-center justify-center">
-        👋{" "}
-        {user?.fullName || (
-          <Skeleton className="w-[140px] h-[20px] rounded-sm" />
-        )}
       </div>
     </div>
   );
 };
 
-export default RightsideBar;
+export default Topbar;
