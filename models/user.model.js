@@ -31,6 +31,26 @@ const userSchema = mongoose.Schema(
       type: String,
       default: "user",
     },
+    questions: {
+      type: [mongoose.Schema.Types.ObjectId],
+      ref: "Question",
+      default: [],
+    },
+    answers: {
+      type: [mongoose.Schema.Types.ObjectId],
+      ref: "Answer",
+      default: [],
+    },
+    following: {
+      type: [mongoose.Schema.Types.ObjectId],
+      ref: "User",
+      default: [],
+    },
+    followers: {
+      type: [mongoose.Schema.Types.ObjectId],
+      ref: "User",
+      default: [],
+    },
   },
   {
     timestamps: true,

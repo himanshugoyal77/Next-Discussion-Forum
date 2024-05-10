@@ -12,7 +12,7 @@ const questionSchema = mongoose.Schema(
     author: {
       type: mongoose.Schema.Types.ObjectId,
       required: true,
-      ref: "DiscussionUser",
+      ref: "User",
     },
     replies: {
       type: [mongoose.Schema.Types.ObjectId],
@@ -25,12 +25,12 @@ const questionSchema = mongoose.Schema(
     },
     upvote: {
       type: [mongoose.Schema.Types.ObjectId],
-      ref: "DiscussionUser",
+      ref: "User",
       default: [],
     },
     downvote: {
       type: [mongoose.Schema.Types.ObjectId],
-      ref: "DiscussionUser",
+      ref: "User",
       default: [],
     },
   },

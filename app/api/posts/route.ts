@@ -23,3 +23,31 @@ export async function GET() {
     );
   }
 }
+
+export async function POST(req: NextRequest) {
+  await dbConnect();
+
+  const { question, description, id, tags } = await req.json();
+  try {
+    const newQuestion = await Question.create({
+      question,
+      description,
+      author: id,
+      tags,
+    });
+    return Response.json(
+      { success: true, data: newQuestion },
+      {
+        status: 201,
+      }
+    );
+  } catch (error) {
+    return Response.json(
+      // @ts-ignore
+      { success: false, error: error?.message },
+      {
+        status: 400,
+      }
+    );
+  }
+}

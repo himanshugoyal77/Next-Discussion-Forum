@@ -52,7 +52,7 @@ export default function RootLayout({
         <Provider store={store}>
           <body
             className={cn(
-              `min-h-screen bg-[${bgPrimary}] font-sans antialiased`,
+              `min-h-screen bg-[#0C0A09] font-sans antialiased`,
               fontSans.variable
             )}
           >
@@ -67,7 +67,9 @@ export default function RootLayout({
               </header>
               <QueryClientProvider client={queryClient} contextSharing={true}>
                 <main
-                  className="h-screen xl:mt-20 mt-[60px] xl:w-[80%] md:w-[95%] sm:w-full mx-auto flex items-center justify-center
+                  className="h-full
+                  bg-[#0C0A09]
+                   pt-[65px] xl:w-[80%] md:w-[95%] sm:w-full mx-auto flex items-center justify-center
             "
                 >
                   <Toaster />
@@ -78,7 +80,7 @@ export default function RootLayout({
                    
                     "
                     >
-                      <div className="h-screen w-full">
+                      <div className="h-full w-full">
                         <Topbar />
                         <MiddleBar />
                         <SidebarBottom />
@@ -86,10 +88,10 @@ export default function RootLayout({
                     </div>
 
                     <div className="w-[55%] mt-2 main_content">
-                      <div className="h-screen w-full flex flex-col items-center justify-start">
+                      <div className="h-full w-full flex flex-col items-center justify-start">
                         <SignedIn>{children}</SignedIn>
                         <SignedOut>
-                          <div className="h-full w-full flex flex-col gap-4 items-center justify-center">
+                          <div className="h-full w-full flex flex-col gap-4 items-center justify-start">
                             <h1>Sign In to Continue...</h1>
                             <PageWithSignIn />
                           </div>
@@ -98,7 +100,7 @@ export default function RootLayout({
                     </div>
                     <div className="right_sidebar w-[30%]">
                       {/* <div className="w-[30%]"></div> */}
-                      <div className="h-screen w-full">
+                      <div className="h-full w-full">
                         <RightsideBar />
                       </div>
                     </div>

@@ -4,6 +4,18 @@ import Loading from "@/components/Loading";
 import axios from "axios";
 import { BadgePlus } from "lucide-react";
 import Image from "next/image";
+import Modal from "@/components/Modal";
+import { DialogFooter, DialogHeader } from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import { Label } from "@radix-ui/react-dropdown-menu";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogTitle,
+  DialogTrigger,
+} from "@radix-ui/react-dialog";
+import Form from "@/components/Form";
 
 const RightsideBar = () => {
   const { isLoading, data, isError, error, isFetching } = useQuery(
@@ -89,14 +101,28 @@ const RightsideBar = () => {
 
 export function CustomButton() {
   return (
-    <Button
-      className="bg-[#FF6934] text-white
-    rounded-xl
-    w-full h-12"
-    >
-      <BadgePlus height={22} width={22} />
-      <p className="ml-2 font-bold text-base">Start new Topic</p>
-    </Button>
+    <>
+      <Button
+        className="bg-[#FF6934] text-white
+      rounded-xl
+      w-full h-12"
+        onClick={() => document.getElementById("my_modal_3").showModal()}
+      >
+        <BadgePlus height={22} width={22} />
+        <p className="ml-2 font-bold text-base">Start new Topic</p>
+      </Button>
+      <dialog id="my_modal_3" className="modal">
+        <div className="modal-box bg-[#1E212A] flex flex-col items-center">
+          <form method="dialog" className="ml-1/2">
+            <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
+              ✕
+            </button>
+          </form>
+
+          <Form />
+        </div>
+      </dialog>
+    </>
   );
 }
 
