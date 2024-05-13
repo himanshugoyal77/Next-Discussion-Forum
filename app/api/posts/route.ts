@@ -27,12 +27,12 @@ export async function GET() {
 export async function POST(req: NextRequest) {
   await dbConnect();
 
-  const { question, description, id, tags } = await req.json();
+  const { question, description, userId, tags } = await req.json();
   try {
     const newQuestion = await Question.create({
       question,
       description,
-      author: id,
+      author: userId,
       tags,
     });
     return Response.json(

@@ -30,7 +30,7 @@ export default function Home() {
     const { fullName, imageUrl, firstName, lastName } = user;
     const { emailAddresses } = user;
     const emailAddress = emailAddresses[0].emailAddress;
-    const id = emailAddresses[0].id;
+    const id = user.id;
     axios
       .post("/api/user", {
         id,

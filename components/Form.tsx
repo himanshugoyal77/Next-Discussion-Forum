@@ -2,14 +2,72 @@ import { useState } from "react";
 import { activeColor } from "./constants";
 import { X } from "lucide-react";
 import { Button } from "./ui/button";
+import { toast } from "sonner";
+import axios from "axios";
+import { useUser } from "@clerk/nextjs";
 
 function Form() {
+  const { user } = useUser();
   const [postTitle, setpostTitle] = useState("");
   const [postDescription, setpostDescription] = useState("");
   const [tags, setTags] = useState([]);
   const [currTag, setCurrTag] = useState("");
 
-  console.log(tags);
+  const handleSubmit = async (e: React.MouseEvent<HTMLElement>) => {
+    e.preventDefault();
+
+    const question = {
+      question: postTitle,
+      description: postDescription,
+      tags: tags,
+      userId: user?.id,
+    };
+
+    let label_0;
+    let label_1;
+
+    const response = await query(postTitle);
+    console.log("response", response[0]);
+    label_0 = response[0][0].label;
+    label_1 = response[0][0].label;
+
+    if (label_0 === "LABEL_0") {
+      toast.error("Your question seems to be a spam", {
+        duration: 2000,
+        dismissible: true,
+      });
+      return;
+    }
+
+    const res = await axios.post(`/api/posts`, question);
+    if (res.status === 201) {
+      toast.success("Question added successfully", {
+        duration: 2000,
+        dismissible: true,
+      });
+      setpostTitle("");
+      setpostDescription("");
+      setTags([]);
+      setCurrTag("");
+      document.getElementById("my_modal_3").open = false;
+    }
+  };
+
+  async function query(data: string) {
+    const response = await fetch(
+      "https://api-inference.huggingface.co/models/shahrukhx01/bert-mini-finetune-question-detection",
+      {
+        headers: {
+          Authorization: "Bearer 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",
+        },
+        method: "POST",
+        body: JSON.stringify(data),
+      }
+    );
+    const result = await response.json();
+
+    return result;
+  }
 
   return (
     <>
@@ -90,6 +148,7 @@ function Form() {
       </div>
 
       <Button
+        onClick={handleSubmit}
         className="bg-[#FF6934] text-white
       rounded-xl
       w-full h-10 mt-4"
