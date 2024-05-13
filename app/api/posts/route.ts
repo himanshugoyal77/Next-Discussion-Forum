@@ -6,7 +6,9 @@ export async function GET() {
   await dbConnect();
 
   try {
-    const posts = await Question.find({}).sort({ createdAt: -1 });
+    const posts = await Question.find({})
+      .sort({ createdAt: -1 })
+      .populate("author");
     return Response.json(
       { success: true, data: posts },
       {

@@ -9,17 +9,31 @@ import {
 import Image from "next/image";
 import React from "react";
 
-export interface IQuestion {
-  question: {
-    _id: string;
-    question: string;
-    description: string;
-    updatedAt: string;
-  };
+interface IUser {
+  _id: string;
+  firstName: string;
+  lastName: string;
+  imageUrl: string;
+  emailAddresses: string;
+  role: string;
+  createdAt: string;
+  updatedAt: string;
 }
 
-const Questions = ({ question }: IQuestion) => {
-  const { user } = useUser();
+export interface IQuestion {
+  _id: string;
+  question: string;
+  description: string;
+  createdAt: string;
+  downvote: [];
+  upvote: [];
+  tags: [string];
+  replies: [];
+  author: IUser | null;
+}
+
+const Questions = (quest: any) => {
+  const { question, description } = quest;
   return (
     <div
       className="flex flex-col shadow-sm shadow-[#242424]
@@ -30,17 +44,19 @@ max-h-min w-[97%] justify-start items-start rounded-xl p-4
     >
       <div className="w-full flex items-start justify-between">
         <div className="user_icon flex items-center justify-center gap-x-2">
-          <Image
-            src={user?.imageUrl!}
+          {/* <Image
+            src={author?.imageUrl!}
             alt="user"
             width={42}
             height={42}
             className="rounded-full"
           />
           <div className="flex flex-col items-start justify-center">
-            <p className="font-bold text-lg">{user?.fullName!}</p>
+            <p className="font-bold text-lg">
+              {author?.firstName + author?.lastName}
+            </p>
             <p className="text-slate-200 text-sm font-normal">2 hours ago</p>
-          </div>
+          </div> */}
         </div>
         <div className="ring-1 ring-gray-500 rounded-full h-8 w-8 flex items-center justify-center">
           <EllipsisVertical height={16} width={16} />

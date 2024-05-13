@@ -10,7 +10,7 @@ const questionSchema = mongoose.Schema(
       type: String,
     },
     author: {
-      type: String,
+      type: mongoose.Schema.Types.ObjectId,
       required: true,
       ref: "User",
     },

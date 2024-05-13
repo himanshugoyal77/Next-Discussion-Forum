@@ -17,6 +17,7 @@ import Questions from "@/components/home/Questions";
 import { IQuestion } from "@/components/home/Questions";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { toast } from "sonner";
+import { CloudHail } from "lucide-react";
 
 export default function Home() {
   const { user } = useUser();
@@ -74,14 +75,15 @@ export default function Home() {
       return axios.get("/api/posts").then((res) => res.data.data);
     }
   );
+
   if (isLoading) return <Loading />;
 
   return (
     <div className="w-full h-screen overflow-y-scroll">
       {data &&
-        data.map((question: IQuestion) => (
-          <Questions key={question?._id!} question={question} />
-        ))}
+        data.map((question: any) => {
+          return <Questions key={question._id} question={question} />;
+        })}
     </div>
   );
 }

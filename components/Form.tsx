@@ -1,17 +1,36 @@
-import { useState } from "react";
+import { use, useEffect, useState } from "react";
 import { activeColor } from "./constants";
 import { X } from "lucide-react";
 import { Button } from "./ui/button";
 import { toast } from "sonner";
 import axios from "axios";
 import { useUser } from "@clerk/nextjs";
+import { useMutation, useQuery, useQueryClient } from "react-query";
 
 function Form() {
   const { user } = useUser();
+  const queryClient = useQueryClient();
   const [postTitle, setpostTitle] = useState("");
   const [postDescription, setpostDescription] = useState("");
   const [tags, setTags] = useState([]);
   const [currTag, setCurrTag] = useState("");
+  const [userId, setUserId] = useState("");
+
+  useEffect(() => {
+    if (user) {
+      axios
+        .get(`/api/user/${user?.id}`)
+        .then((res) => setUserId(res.data.data?._id));
+    }
+  }, [user]);
+
+  const mutation = useMutation({
+    mutationKey: ["addQuestion"],
+    mutationFn: (question: Object) => axios.post(`/api/posts`, question),
+    onSuccess: () => {
+      queryClient.invalidateQueries("getAllQuestions");
+    },
+  });
 
   const handleSubmit = async (e: React.MouseEvent<HTMLElement>) => {
     e.preventDefault();
@@ -20,7 +39,7 @@ function Form() {
       question: postTitle,
       description: postDescription,
       tags: tags,
-      userId: user?.id,
+      userId,
     };
 
     let label_0;
@@ -39,7 +58,8 @@ function Form() {
       return;
     }
 
-    const res = await axios.post(`/api/posts`, question);
+    const res = await mutation.mutateAsync(question);
+    console.log("res", res);
     if (res.status === 201) {
       toast.success("Question added successfully", {
         duration: 2000,
