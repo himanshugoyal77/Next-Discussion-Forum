@@ -106,6 +106,7 @@ export function CustomButton() {
         className="bg-[#FF6934] text-white
       rounded-xl
       w-full h-12"
+        // @ts-ignore
         onClick={() => document.getElementById("my_modal_3").showModal()}
       >
         <BadgePlus height={22} width={22} />

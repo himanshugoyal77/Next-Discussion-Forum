@@ -2,7 +2,7 @@ import React from "react";
 import Image from "next/image";
 
 const MiddleBar = () => {
-  const pathname = "/popular";
+  let pathname = "/popular";
 
   const active =
     "relative bg-[#2C353D] text-white text-black font-semibold rounded-r-md";
@@ -55,7 +55,7 @@ const MiddleBar = () => {
       >
         <div
           className={`flex items-center justify-center gap-[10px] ${
-            pathname === "following" ? "text-[#FF6934]" : ""
+            pathname === "/following" ? "text-[#FF6934]" : ""
           }`}
         >
           <Image src="/add-friend.png" height={22} width={22} alt="image" />
