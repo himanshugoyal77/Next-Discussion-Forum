@@ -11,7 +11,6 @@ import React, { useEffect, useState } from "react";
 import { useQuery } from "react-query";
 import Write from "@/icons/Write";
 import Send from "@/icons/Send";
-import UserInfo from "@/components/home/UserInfo";
 import { useUser } from "@clerk/nextjs";
 import Questions from "@/components/home/Questions";
 import MemoizedQuestions, { IQuestion } from "@/components/home/Questions";
