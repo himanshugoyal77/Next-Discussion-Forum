@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const replySchema = mongoose.Schema(
   {
-    reply: {
+    comment: {
       type: String,
       required: true,
     },
@@ -10,6 +10,21 @@ const replySchema = mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       required: true,
       ref: "User",
+    },
+    questionId: {
+      type: mongoose.Schema.Types.ObjectId,
+      required: true,
+      ref: "Question",
+    },
+    likes: {
+      type: [mongoose.Schema.Types.ObjectId],
+      ref: "User",
+      default: [],
+    },
+    dislikes: {
+      type: [mongoose.Schema.Types.ObjectId],
+      ref: "User",
+      default: [],
     },
   },
   {

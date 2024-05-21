@@ -39,6 +39,5 @@ const questionSchema = mongoose.Schema(
   }
 );
 
-const Question =
-  mongoose.models.Question || mongoose.model("Question", questionSchema);
-export default Question;
+const Quest = mongoose.models.Quest || mongoose.model("Quest", questionSchema);
+export default Quest;

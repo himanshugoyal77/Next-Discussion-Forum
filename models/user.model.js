@@ -33,12 +33,12 @@ const userSchema = mongoose.Schema(
     },
     questions: {
       type: [mongoose.Schema.Types.ObjectId],
-      ref: "Question",
+      ref: "Quest",
       default: [],
     },
     answers: {
       type: [mongoose.Schema.Types.ObjectId],
-      ref: "Answer",
+      ref: "Reply",
       default: [],
     },
     following: {

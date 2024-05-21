@@ -27,21 +27,26 @@ const Header = () => {
   const { user } = useUser();
   const { resolvedTheme } = useTheme();
 
-  // const dispatch = useDispatch();
-  // // @ts-ignore
-  // const open = useSelector((state) => state.sidebar.open);
+  const dispatch = useDispatch();
+  // @ts-ignore
+  const open = useSelector((state) => state.sidebar.open);
 
   return (
-    <nav className="w-full bg-[#262D34] mx-24 my-2 flex items-center justify-between">
-      <div className="logo cursor-pointer w-full flex items-center justify-start gap-3">
-        <AlignStartVerticalIcon height={22} width={22} color="#FF6934" />
-        <h1 className="text-2xl font-bold text-[#FF6934]">H-Forum</h1>
+    <nav className="w-full bg-[#262D34] mx-4 md:mx-24 my-2 flex items-center justify-between">
+      <div
+        onClick={() => {
+          dispatch(toggle());
+        }}
+        className="logo cursor-pointer md:w-full flex items-center justify-start gap-2 md:gap-3"
+      >
+        <AlignStartVerticalIcon color="#FF6934" />
+        <h1 className="md:text-2xl font-bold text-[#FF6934]">H-Forum</h1>
       </div>
-      <div className="w-full">
+      <div className="w-1/2 md:w-full">
         <InputWithButton />
       </div>
-      <div className="w-full flex items-center justify-end gap-3">
-        <div className="w-6 h-6 relative mr-2">
+      <div className="md:w-full flex items-center justify-end md:gap-3">
+        <div className="hidden md:block w-6 h-6 relative mr-2">
           <Bell
             height={22}
             width={22}
@@ -55,7 +60,7 @@ const Header = () => {
             baseTheme: resolvedTheme === "dark" ? dark : undefined,
           }}
         />
-        <h2>{user?.fullName}</h2>
+        <h2 className="hidden md:block">{user?.fullName}</h2>
       </div>
     </nav>
   );

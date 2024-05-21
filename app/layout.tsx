@@ -58,26 +58,24 @@ export default function RootLayout({
           >
             <ThemeProvider
               attribute="class"
-              defaultTheme="system"
-              enableSystem
+              defaultTheme="dark"
               disableTransitionOnChange
             >
-              <header className="w-full flex items-center bg-[#262D34] justify-center fixed top-0">
+              <header className="w-full flex items-center bg-[#262D34] justify-center fixed top-0 z-[999]">
                 <Header />
               </header>
               <QueryClientProvider client={queryClient} contextSharing={true}>
                 <main
                   className="h-full
                   bg-[#0C0A09]
-                   pt-[65px] xl:w-[80%] md:w-[95%] sm:w-full mx-auto flex items-center justify-center
+                  pt-[44px] md:pt-[65px] xl:w-[80%] md:w-[95%] sm:w-full mx-auto flex items-center justify-center
             "
                 >
                   <Toaster />
                   <SidebarMobile />
                   <div className="flex w-full">
                     <div
-                      className="left_sidebar p-1 pr-5 hidden w-[17%] md:w-[24%] md:block
-                   
+                      className="left_sidebar p-1 pr-5 hidden w-[17%] md:w-[24%] md:block           
                     "
                     >
                       <div className="h-full w-full">
@@ -87,8 +85,8 @@ export default function RootLayout({
                       </div>
                     </div>
 
-                    <div className="w-[55%] mt-2 main_content">
-                      <div className="h-full w-full flex flex-col items-center justify-start">
+                    <div className="md:w-[55%] mt-2 main_content">
+                      <div className="h-full w-full flex flex-col items-center justify-start px-4 pt-5 md:px-0 md:pt-0">
                         <SignedIn>{children}</SignedIn>
                         <SignedOut>
                           <div className="h-full w-full flex flex-col gap-4 items-center justify-start">
@@ -98,7 +96,8 @@ export default function RootLayout({
                         </SignedOut>
                       </div>
                     </div>
-                    <div className="right_sidebar w-[30%]">
+
+                    <div className="right_sidebar w-[30%] hidden md:block">
                       {/* <div className="w-[30%]"></div> */}
                       <div className="h-full w-full">
                         <RightsideBar />

@@ -14,7 +14,7 @@ import Send from "@/icons/Send";
 import UserInfo from "@/components/home/UserInfo";
 import { useUser } from "@clerk/nextjs";
 import Questions from "@/components/home/Questions";
-import { IQuestion } from "@/components/home/Questions";
+import MemoizedQuestions, { IQuestion } from "@/components/home/Questions";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { toast } from "sonner";
 import { CloudHail } from "lucide-react";
@@ -79,10 +79,10 @@ export default function Home() {
   if (isLoading) return <Loading />;
 
   return (
-    <div className="w-full h-screen overflow-y-scroll">
+    <div className="w-full h-screen overflow-y-scroll mb-5">
       {data &&
         data.map((question: any) => {
-          return <Questions key={question._id} question={question} />;
+          return <MemoizedQuestions key={question._id} question={question} />;
         })}
     </div>
   );
