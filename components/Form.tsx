@@ -78,7 +78,7 @@ function Form() {
       "https://api-inference.huggingface.co/models/shahrukhx01/bert-mini-finetune-question-detection",
       {
         headers: {
-          Authorization: "Bearer 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",
+          Authorization: `Bearer ${process.env.NEXT_PUBLIC_Hf_API_KEY}`,
         },
         method: "POST",
         body: JSON.stringify(data),

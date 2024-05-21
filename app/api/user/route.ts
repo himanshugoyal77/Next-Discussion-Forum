@@ -3,11 +3,6 @@ import { NextRequest, NextResponse } from "next/server";
 import { NextApiRequest, NextApiResponse } from "next";
 import User from "@/models/user.model";
 
-export const config = {
-  api: {
-    bodyParser: true,
-  },
-};
 
 export async function GET(req: NextRequest) {
   await dbConnect();
