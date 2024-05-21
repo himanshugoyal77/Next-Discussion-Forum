@@ -69,6 +69,7 @@ function Form() {
       setpostDescription("");
       setTags([]);
       setCurrTag("");
+      // @ts-ignore
       document.getElementById("my_modal_3").open = false;
     }
   };
