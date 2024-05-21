@@ -143,8 +143,10 @@ function Form() {
           }}
           onKeyDown={(e) => {
             if (e.key === "Enter") {
+              // @ts-ignore
               setTags([...tags, currTag]);
               setCurrTag("");
+              // @ts-ignore
               e.target.value = "";
             }
           }}
